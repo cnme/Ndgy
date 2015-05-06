@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <integer-array name="gplus_colors">
+        <item>@color/gplus_color_1</item>
+        <item>@color/gplus_color_2</item>
+        <item>@color/gplus_color_3</item>
+        <item>@color/gplus_color_4</item>
+    </integer-array>
+
+    <color name="theme_color">#3399ff</color>
+    <color name="white">#ffffff</color>
+    <color name="gray">#666666</color>
+    <color name="transparent">#00000000</color>
+    <color name="gold">#b89766</color>
+    <color name="select">#98aacc</color>
+    <color name="gplus_color_1">#3e802f</color>
+    <color name="gplus_color_2">#427fed</color>
+    <color name="gplus_color_3">#b23424</color>
+    <color name="gplus_color_4">#f4b400</color>
+    <color name="btn_normal">#eeeeee</color>
+    <color name="btn_pressed">#0066cc</color>
+    <color name="nav_item_normal">#00000000</color>
+    <color name="nav_item_pressed">#ffffff</color>
+    <color name="menu_color">#008FEE</color>
+    
+
+</resources>

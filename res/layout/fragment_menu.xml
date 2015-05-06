@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/Rl_nav"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:layout_width="200dp"
+            android:layout_height="match_parent"
+            android:background="#eeeeee" >
+
+            <RelativeLayout
+                android:id="@+id/rl_one"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_alignParentTop="true"
+                android:background="#3399ff" >
+            </RelativeLayout>
+
+            <ImageView
+                android:id="@+id/iv_user_icon"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="70dp"
+                android:src="@drawable/user_icon_default" />
+            
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/iv_user_icon" >
+
+                <LinearLayout
+                    android:id="@+id/linearLayout1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:id="@+id/tv_navi_freedom"
+                        style="@style/navitext"
+                        android:layout_marginTop="30dp"
+                        android:background="@drawable/nav_item_selector"
+                        android:drawableLeft="@drawable/freedom_icon"
+                        android:drawablePadding="10dp"
+                        android:paddingBottom="10dp"
+                        android:paddingTop="10dp"
+                        android:text="自 由 区"
+                        android:textColor="#999999" />
+
+                    <TextView
+                        android:id="@+id/tv_navi_love"
+                        style="@style/navitext"
+                        android:background="@drawable/nav_item_selector"
+                        android:drawableLeft="@drawable/love_icon"
+                        android:drawablePadding="10dp"
+                        android:paddingBottom="10dp"
+                        android:paddingTop="10dp"
+                        android:text="爱 恋 区"
+                        android:textColor="#999999" />
+
+                    <TextView
+                        android:id="@+id/tv_navi_study"
+                        style="@style/navitext"
+                        android:background="@drawable/nav_item_selector"
+                        android:drawableLeft="@drawable/mobile_icon"
+                        android:drawablePadding="10dp"
+                        android:paddingBottom="10dp"
+                        android:paddingTop="10dp"
+                        android:text="学 习 区"
+                        android:textColor="#999999" />
+
+                    <TextView
+                        android:id="@+id/tv_navi_travl"
+                        style="@style/navitext"
+                        android:background="@drawable/nav_item_selector"
+                        android:drawableLeft="@drawable/travel_icon"
+                        android:drawablePadding="10dp"
+                        android:paddingBottom="10dp"
+                        android:paddingTop="10dp"
+                        android:text="驴 友 区"
+                        android:textColor="#999999" />
+
+                    <TextView
+                        android:id="@+id/tv_navi_settings"
+                        style="@style/navitext"
+                        android:background="@drawable/nav_item_selector"
+                        android:drawableLeft="@drawable/more_setting"
+                        android:drawablePadding="10dp"
+                        android:paddingBottom="10dp"
+                        android:paddingTop="10dp"
+                        android:text="设      置"
+                        android:textColor="#999999" />
+                </LinearLayout>
+            </ScrollView>
+        </RelativeLayout>
+    </LinearLayout>
+
+</RelativeLayout>
