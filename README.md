@@ -2,6 +2,7 @@
 南大共院社交App
 
 涉及的知识主要有：
+
 1.Activity的管理（Application）。
 
 2.Fragment自定义的菜单及其管理。
@@ -19,4 +20,4 @@
 8.网络请求（基于Bmob技）的基础实现。
 
 
-相关知识解析：cnme.github.io
+相关知识解析：<a href=cnme.github.io>Back小站</a>
