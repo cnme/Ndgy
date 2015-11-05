@@ -20,4 +20,4 @@
 8.网络请求（基于Bmob技）的基础实现。
 
 
-相关知识解析：<a href=cnme.github.io>Back小站</a>
+相关知识解析：<a href=http://cnme.github.io/>Back小站</a>
