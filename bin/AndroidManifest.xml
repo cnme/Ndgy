@@ -26,11 +26,6 @@
             android:name=".ui.Activity_Main"
             android:label="@string/app_name"
             android:theme="@android:style/Theme.Light.NoTitleBar" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".ui.Personal" >
         </activity>
@@ -39,7 +34,7 @@
             android:theme="@android:style/Theme.Light.NoTitleBar" >
         </activity>
         <activity
-            android:name=".ui.Activity_UseRigster"
+            android:name=".ui.Activity_Login"
             android:theme="@android:style/Theme.Light.NoTitleBar" >
         </activity>
         <activity
@@ -54,6 +49,11 @@
         <activity
             android:name=".ui.Activity_Splash"
             android:theme="@android:style/Theme.Light.NoTitleBar" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".ui.Activity_img"
@@ -71,7 +71,8 @@
             android:name=".ui.Activity_Comment_D"
             android:theme="@android:style/Theme.Light.NoTitleBar" >
         </activity>
-        <activity android:name=".ui.Activity_goods"></activity>
+        <activity android:name=".ui.Activity_goods" >
+        </activity>
     </application>
 
 </manifest>

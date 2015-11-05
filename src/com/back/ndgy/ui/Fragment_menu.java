@@ -27,14 +27,17 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+/**
+ * 
+ * @Back
+ * @fragment 自定义的菜单
+ * @2015/5
+ */
 public class Fragment_menu extends Fragment implements OnClickListener {
 
 	private View rootView;
 	private ImageView user_icon;
 	private TextView tv_freendom, tv_settings, tv_love, tv_study, tv_travel;
-	private Bitmap bmpimage;
-	private SharedPreferences sp;
-	private String path = ActivityUtils.getCacheDirectory(1) + "usericon.png";
 	private AsyncBitmapLoader asyncBitmapLoader;
 
 	@Override
@@ -59,6 +62,9 @@ public class Fragment_menu extends Fragment implements OnClickListener {
 
 	}
 
+	/**
+	 * 下载用户头像
+	 */
 	private void download_user_icon() {
 		asyncBitmapLoader = new AsyncBitmapLoader();
 		User user = BmobUser.getCurrentUser(getActivity(), User.class);
@@ -124,11 +130,19 @@ public class Fragment_menu extends Fragment implements OnClickListener {
 
 	}
 
+	/**
+	 * 切换fragment页
+	 * 
+	 * @param index
+	 */
 	private void switchContent(int index) {
 		Activity_Main activity_Main = (Activity_Main) getActivity();
 		activity_Main.switchContent(index);
 	}
 
+	/**
+	 * 关闭菜单
+	 */
 	private void closemenu() {
 		// TODO Auto-generated method stub
 		Activity_Main activity_Main = (Activity_Main) getActivity();

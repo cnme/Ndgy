@@ -4,18 +4,13 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.List;
-
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobQuery.CachePolicy;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.datatype.BmobFile;
-import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.GetListener;
-import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UpdateListener;
 import cn.bmob.v3.listener.UploadFileListener;
-
 import com.back.ndgy.R;
 import com.back.ndgy.adapter.AsyncBitmapLoader;
 import com.back.ndgy.adapter.AsyncBitmapLoader.ImageCallBack;
@@ -23,12 +18,10 @@ import com.back.ndgy.data.Myapplication;
 import com.back.ndgy.data.User;
 import com.back.ndgy.utils.ActivityUtils;
 import com.back.ndgy.utils.DataCleanManager;
-
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -38,26 +31,27 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
+/**
+ * 
+ * @Back
+ * @设置
+ * @2015/5
+ */
 public class Activity_Setting extends Activity implements OnClickListener {
 	private RelativeLayout usericon;
 	private ImageView usericonimage, iv_settingsback;
-	private Bitmap photo, bmpimage;;
+	private Bitmap photo;
 	private String iconUrl, path = Environment.getExternalStorageDirectory()
 			.getPath() + "/NdgyCache/", usericonname = "usericon.png", str,
 			signature, sex;
 	public static final int PHOTOZOOM = 1;
 	public static final int PHOTORESOULT = 2;
 	private AsyncBitmapLoader asyncBitmapLoader;
-	private File path1;
 	private User user;
 	private Button sex_choice;
 	private TextView tv_nickname, tv_sign_text, tv_user_logout;
@@ -294,7 +288,7 @@ public class Activity_Setting extends Activity implements OnClickListener {
 		if (data == null)
 			return;
 
-		// 读取相册缩放图片
+		// 读取相册图片
 		if (requestCode == PHOTOZOOM) {
 			startPhotoZoom(data.getData());
 
@@ -314,14 +308,16 @@ public class Activity_Setting extends Activity implements OnClickListener {
 		super.onActivityResult(requestCode, resultCode, data);
 	}
 
+	/**
+	 * 裁切图片
+	 * @param uri
+	 */
 	public void startPhotoZoom(Uri uri) {
 		Intent intent = new Intent("com.android.camera.action.CROP");
 		intent.setDataAndType(uri, "image/*");
 		intent.putExtra("crop", "true");
-		// aspectX aspectY 是宽高的比例
 		intent.putExtra("aspectX", 1);
 		intent.putExtra("aspectY", 1);
-		// outputX outputY 是裁剪图片宽高
 		intent.putExtra("outputX", 120);
 		intent.putExtra("outputY", 120);
 		intent.putExtra("return-data", true);
@@ -342,6 +338,11 @@ public class Activity_Setting extends Activity implements OnClickListener {
 		return super.onKeyDown(keyCode, event);
 	}
 
+	/**
+	 * 保存头像至SD卡
+	 * @param bitmap
+	 * @return
+	 */
 	public String saveToSdCard(Bitmap bitmap) {
 		File file = new File(path + usericonname);
 
@@ -364,6 +365,10 @@ public class Activity_Setting extends Activity implements OnClickListener {
 		return file.getAbsolutePath();
 	}
 
+	/**
+	 * 更新头像
+	 * @param avataPath
+	 */
 	private void updateIcon(String avataPath) {
 		if (avataPath != null) {
 

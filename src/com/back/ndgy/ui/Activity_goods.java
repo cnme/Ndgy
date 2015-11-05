@@ -4,18 +4,18 @@ import java.util.List;
 
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.listener.FindListener;
-
 import com.back.ndgy.R;
-import com.back.ndgy.adapter.Images;
 import com.back.ndgy.data.GoodsData;
-
-import android.R.integer;
 import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
 
+/**
+ * 
+ * @Back
+ * @Ê§ÎïÕĞÁì
+ * @2015/5
+ */
 public class Activity_goods extends Activity {
-	private static int limit = 12; // æ¯é¡µåŠ è½½çš„æ•°æ®æ¡æ•°
 
 	public static int size;
 	public static String[] imageUrls = new String[17];
@@ -28,6 +28,9 @@ public class Activity_goods extends Activity {
 
 	}
 
+	/**
+	 * »ñÈ¡Êı¾İ
+	 */
 	public final void querydata() {
 
 		BmobQuery<GoodsData> gQuery = new BmobQuery<GoodsData>();
@@ -42,7 +45,6 @@ public class Activity_goods extends Activity {
 				for (int i = 0; i < arg0.size(); i++) {
 					imageUrls[i] = arg0.get(i).getPic()
 							.getFileUrl(Activity_goods.this);
-					Log.i("åœ°å€", imageUrls[i] + i);
 				}
 				setContentView(R.layout.activity_goods);
 			}

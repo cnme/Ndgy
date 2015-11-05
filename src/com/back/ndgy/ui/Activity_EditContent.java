@@ -4,12 +4,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UploadFileListener;
-
 import com.back.ndgy.R;
 import com.back.ndgy.data.FreedomSpeechDate;
 import com.back.ndgy.data.LoveData;
@@ -18,7 +16,6 @@ import com.back.ndgy.data.StudyData;
 import com.back.ndgy.data.TravelData;
 import com.back.ndgy.data.User;
 import com.back.ndgy.utils.ActivityUtils;
-
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.ContentResolver;
@@ -28,10 +25,8 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Bitmap.Config;
-import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
@@ -41,10 +36,16 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
+/**
+ * 
+ * @Back
+ * @发布动态
+ * @2015/5
+ */
 public class Activity_EditContent extends Activity implements OnClickListener {
-	LinearLayout open_pic, take_pic;
+	LinearLayout open_pic;// 打开相册选择图片
+	LinearLayout take_pic;// 打开相机拍照
 	EditText edit_content;
 	TextView tv_sned;
 	ImageView iv_open_pic, iv_take_pic;
@@ -64,6 +65,9 @@ public class Activity_EditContent extends Activity implements OnClickListener {
 
 	}
 
+	/**
+	 * 初始化控件
+	 */
 	private void Init() {
 		tv_sned = (TextView) findViewById(R.id.tv_send);
 		edit_content = (EditText) findViewById(R.id.edit_content);
@@ -92,6 +96,7 @@ public class Activity_EditContent extends Activity implements OnClickListener {
 			break;
 		case R.id.take_layout:
 			currenttime = System.currentTimeMillis();
+			// 初始化图像文件存放路径
 			File file = new File(ActivityUtils.getCacheDirectory(2)
 					+ "Original/", currenttime + ".jpg");
 			if (file.exists()) {
@@ -104,7 +109,7 @@ public class Activity_EditContent extends Activity implements OnClickListener {
 			}
 
 			Uri uri = Uri.fromFile(file);
-			Intent camera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+			Intent camera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);// 打开相机
 			camera.putExtra(MediaStore.EXTRA_OUTPUT, uri);
 			startActivityForResult(camera, REQUEST_CODE_CAMERA);
 			break;
@@ -121,6 +126,9 @@ public class Activity_EditContent extends Activity implements OnClickListener {
 		}
 	}
 
+	/**
+	 * 发布动态 先上传图像文件，再上传相关文字
+	 */
 	private void publish(final String commitContent) {
 
 		final BmobFile figureFile = new BmobFile(new File(targeturl));
@@ -128,7 +136,7 @@ public class Activity_EditContent extends Activity implements OnClickListener {
 
 			@Override
 			public void onSuccess() {
-				Toast("图片上传成功");
+				ActivityUtils.Toast(Activity_EditContent.this, "图片上传成功");
 				publishWithoutFigure(commitContent, figureFile);
 
 			}
@@ -148,8 +156,7 @@ public class Activity_EditContent extends Activity implements OnClickListener {
 
 	private void publishWithoutFigure(final String commitContent,
 			BmobFile figureFile) {
-		Toast("开始发表" + figureFile);
-
+		
 		View view = View.inflate(Activity_EditContent.this,
 				R.layout.dialog_loading_data, null);
 		final Dialog dialog = new Dialog(Activity_EditContent.this,
@@ -168,7 +175,6 @@ public class Activity_EditContent extends Activity implements OnClickListener {
 			freedomSpeechDate.setLove(0);
 			freedomSpeechDate.setComment(0);
 			freedomSpeechDate.setPass(true);
-			Toast("发表last");
 			freedomSpeechDate.save(this, new SaveListener() {
 
 				@Override
@@ -196,7 +202,6 @@ public class Activity_EditContent extends Activity implements OnClickListener {
 			loveData.setLove(0);
 			loveData.setComment(0);
 			loveData.setPass(true);
-			Toast("发表last");
 			loveData.save(this, new SaveListener() {
 
 				@Override
@@ -224,7 +229,6 @@ public class Activity_EditContent extends Activity implements OnClickListener {
 			studyData.setLove(0);
 			studyData.setComment(0);
 			studyData.setPass(true);
-			Toast("发表last");
 			studyData.save(this, new SaveListener() {
 
 				@Override
@@ -251,7 +255,6 @@ public class Activity_EditContent extends Activity implements OnClickListener {
 			travelData.setLove(0);
 			travelData.setComment(0);
 			travelData.setPass(true);
-			Toast("发表last");
 			travelData.save(this, new SaveListener() {
 
 				@Override
@@ -279,6 +282,9 @@ public class Activity_EditContent extends Activity implements OnClickListener {
 
 	String targeturl = null;
 
+	/**
+	 * Activity 返回结果，处理图像信息
+	 */
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// TODO Auto-generated method stub
@@ -287,7 +293,6 @@ public class Activity_EditContent extends Activity implements OnClickListener {
 		case PHOTOZOOM:
 			Log.i("开始处理图片", "dddddddddddd");
 
-			Toast("开始处理");
 			String fileName = null;
 			if (data != null) {
 				Uri originalUri = data.getData();
@@ -311,7 +316,6 @@ public class Activity_EditContent extends Activity implements OnClickListener {
 			break;
 
 		case REQUEST_CODE_CAMERA:
-			Toast("开始处理");
 
 			String files = ActivityUtils.getCacheDirectory(2) + "Original/"
 					+ currenttime + ".jpg";
@@ -321,7 +325,6 @@ public class Activity_EditContent extends Activity implements OnClickListener {
 				targeturl = saveToSdCard(bitmap);
 				iv_take_pic.setImageBitmap(bitmap);
 				open_pic.setVisibility(View.GONE);
-				Toast("开始处理1");
 			} else {
 
 			}
@@ -332,6 +335,9 @@ public class Activity_EditContent extends Activity implements OnClickListener {
 		super.onActivityResult(requestCode, resultCode, data);
 	}
 
+	/**
+	 * 对图像文件进行压缩处理
+	 */
 	private Bitmap compressImageFromFile(String srcPath) {
 		BitmapFactory.Options newOpts = new BitmapFactory.Options();
 		newOpts.inJustDecodeBounds = true;// 只读边,不读内容
@@ -355,10 +361,12 @@ public class Activity_EditContent extends Activity implements OnClickListener {
 		newOpts.inPurgeable = true;// 同时设置才会有效
 		newOpts.inInputShareable = true;// 。当系统内存不够时候图片自动被回收
 		bitmap = BitmapFactory.decodeFile(srcPath, newOpts);
-		Toast("图片处理成功");
 		return bitmap;
 	}
 
+	/**
+	 * 保存图像文件至SD卡
+	 */
 	public String saveToSdCard(Bitmap bitmap) {
 		String files = ActivityUtils.getCacheDirectory(2) + "send_pic.jpg";
 		File file = new File(files);
@@ -368,24 +376,17 @@ public class Activity_EditContent extends Activity implements OnClickListener {
 			if (bitmap.compress(Bitmap.CompressFormat.JPEG, 35, out)) {
 				out.flush();
 				out.close();
-				Toast("保存SD卡成功");
 			}
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			Toast("保存SD卡失败");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 
-			Toast("保存SD卡失败");
 		}
 
 		return file.getAbsolutePath();
 	}
 
-	private void Toast(String toast) {
-		Toast.makeText(this, toast, 3000).show();
-
-	}
 }

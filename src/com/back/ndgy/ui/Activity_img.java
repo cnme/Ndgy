@@ -4,7 +4,6 @@ import com.back.ndgy.R;
 import com.back.ndgy.adapter.AsyncBitmapLoader;
 import com.back.ndgy.adapter.AsyncBitmapLoader.ImageCallBack;
 import com.back.ndgy.data.Myapplication;
-
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -13,6 +12,12 @@ import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+/**
+ * 
+ * @Back 
+ * @Listview itemͼƬ
+ * @time
+ */
 public class Activity_img extends Activity {
 
 private AsyncBitmapLoader asyncBitmapLoader = new AsyncBitmapLoader();;

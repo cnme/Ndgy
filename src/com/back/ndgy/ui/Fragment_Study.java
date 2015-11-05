@@ -1,23 +1,13 @@
 package com.back.ndgy.ui;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
-
 import cn.bmob.v3.BmobQuery;
-import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.listener.FindListener;
-
 import com.back.ndgy.R;
-import com.back.ndgy.adapter.FreedomSpeechAdapter;
-import com.back.ndgy.adapter.LoveAdapter;
 import com.back.ndgy.adapter.StudyAdapter;
-import com.back.ndgy.data.FreedomSpeechDate;
-import com.back.ndgy.data.LoveData;
 import com.back.ndgy.data.StudyData;
-import com.back.ndgy.data.User;
 import com.back.ndgy.utils.ActivityUtils;
-
 import android.app.Fragment;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -32,13 +22,12 @@ public class Fragment_Study extends Fragment implements OnClickListener,
 	private View rootview;
 	private RefreshListView freedoom_lv;
 	private StudyAdapter mcadapter;
-	private SharedPreferences spPreferences;
 	public static ArrayList<StudyData> DataList = new ArrayList<StudyData>();
-	private static final int STATE_FRIST = 0;// 首次加载
-	private static final int STATE_REFRESH = 1;// 下拉刷新
-	private static final int STATE_MORE = 2;// 加载更多
-	private int limit = 10; // 每页的数据是10条
-	private int curPage = 0; // 当前页的编号，从0开始
+	private static final int STATE_FRIST = 0;
+	private static final int STATE_REFRESH = 1;
+	private static final int STATE_MORE = 2;
+	private int limit = 10; 
+	private int curPage = 0; 
 	private SharedPreferences sp;
 
 	@Override

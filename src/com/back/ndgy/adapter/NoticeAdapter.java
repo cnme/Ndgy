@@ -1,37 +1,17 @@
 package com.back.ndgy.adapter;
 
 import java.util.List;
-
-import cn.bmob.v3.BmobObject;
-import cn.bmob.v3.BmobQuery;
-import cn.bmob.v3.BmobQuery.CachePolicy;
-import cn.bmob.v3.listener.GetListener;
 import cn.bmob.v3.listener.UpdateListener;
-
 import com.back.ndgy.R;
 import com.back.ndgy.data.Comment;
-import com.back.ndgy.data.FreedomSpeechDate;
-import com.back.ndgy.data.LoveData;
-import com.back.ndgy.data.StudyData;
-import com.back.ndgy.data.TravelData;
-import com.back.ndgy.ui.Activity_Comment;
-import com.back.ndgy.ui.Activity_Notice;
-
 import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.AdapterView.OnItemClickListener;
 
 public class NoticeAdapter extends BaseAdapter {
 	LayoutInflater inflater;

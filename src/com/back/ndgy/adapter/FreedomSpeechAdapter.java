@@ -1,10 +1,6 @@
 package com.back.ndgy.adapter;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
-
-import cn.bmob.v3.listener.UpdateListener;
-
 import com.back.ndgy.R;
 import com.back.ndgy.adapter.AsyncBitmapLoader.ImageCallBack;
 import com.back.ndgy.data.FreedomSpeechDate;
@@ -12,10 +8,6 @@ import com.back.ndgy.data.User;
 import com.back.ndgy.ui.Activity_Comment;
 import com.back.ndgy.ui.RefreshListView;
 import com.back.ndgy.ui.Activity_img;
-import com.back.ndgy.utils.ActivityUtils;
-
-import android.R.integer;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -27,13 +19,10 @@ import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.widget.AbsListView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.Space;
 import android.widget.TextView;
 
 public class FreedomSpeechAdapter extends BaseAdapter {
@@ -63,6 +52,7 @@ public class FreedomSpeechAdapter extends BaseAdapter {
 
 	@Override
 	public View getView(final int position, View convertView, ViewGroup parent) {
+		/* 重复利用converView */
 		if (convertView == null) {
 			convertView = inflater.inflate(R.layout.fragment_item, null);
 			holder = new ViewHolder();
@@ -214,6 +204,7 @@ public class FreedomSpeechAdapter extends BaseAdapter {
 		return convertView;
 	}
 
+	/* 内部类 ，缓存item项视图控件 */
 	class ViewHolder {
 		ImageView img;
 		TextView tv_content, tv_love, tv_username, tv_comment, tv_signature;
@@ -224,7 +215,7 @@ public class FreedomSpeechAdapter extends BaseAdapter {
 
 	public void refreshData(ArrayList<FreedomSpeechDate> arg0) {
 		this.DataList = arg0;
-		notifyDataSetChanged();
+		notifyDataSetChanged();//刷新视图
 
 	}
 

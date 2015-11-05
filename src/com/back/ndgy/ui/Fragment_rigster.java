@@ -4,22 +4,18 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UpdateListener;
 import cn.bmob.v3.listener.UploadFileListener;
-
 import com.back.ndgy.R;
 import com.back.ndgy.data.User;
 import com.back.ndgy.utils.ActivityUtils;
-
 import android.app.Dialog;
 import android.app.Fragment;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.AvoidXfermode.Mode;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -33,6 +29,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+/**
+ * 
+ * @Back
+ * @×¢²á
+ * @2015/5
+ */
 public class Fragment_rigster extends Fragment implements OnClickListener {
 	private View rootview;
 	private ImageView iv_avater;
@@ -95,6 +97,9 @@ public class Fragment_rigster extends Fragment implements OnClickListener {
 
 	}
 
+	/**
+	 * ´ò¿ªÍ¼¿â
+	 */
 	private void avatet() {
 		Intent intent = new Intent();
 		intent.setAction(Intent.ACTION_PICK);
@@ -103,6 +108,9 @@ public class Fragment_rigster extends Fragment implements OnClickListener {
 
 	}
 
+	/**
+	 * ×¢²á
+	 */
 	private void rigster() {
 		View view = View.inflate(getActivity(), R.layout.dialog_loading, null);
 		final Dialog dialog = new Dialog(getActivity(), R.style.dialog);
@@ -139,7 +147,7 @@ public class Fragment_rigster extends Fragment implements OnClickListener {
 		if (data == null)
 			return;
 
-		// ¶ÁÈ¡Ïà²áËõ·ÅÍ¼Æ¬
+		// ¶ÁÈ¡Ïà²áÍ¼Æ¬
 		if (requestCode == PHOTOZOOM) {
 			startPhotoZoom(data.getData());
 
@@ -159,14 +167,16 @@ public class Fragment_rigster extends Fragment implements OnClickListener {
 		super.onActivityResult(requestCode, resultCode, data);
 	}
 
+	/**
+	 * ²ÃÇÐÍ¼Æ¬
+	 * @param uri
+	 */
 	public void startPhotoZoom(Uri uri) {
 		Intent intent = new Intent("com.android.camera.action.CROP");
 		intent.setDataAndType(uri, "image/*");
 		intent.putExtra("crop", "true");
-		// aspectX aspectY ÊÇ¿í¸ßµÄ±ÈÀý
 		intent.putExtra("aspectX", 1);
 		intent.putExtra("aspectY", 1);
-		// outputX outputY ÊÇ²Ã¼ôÍ¼Æ¬¿í¸ß
 		intent.putExtra("outputX", 120);
 		intent.putExtra("outputY", 120);
 		intent.putExtra("return-data", true);
@@ -216,8 +226,8 @@ public class Fragment_rigster extends Fragment implements OnClickListener {
 						@Override
 						public void onSuccess() {
 							ActivityUtils.Toast(getActivity(), "×¢²á³É¹¦");
-							Activity_UseRigster activity_UseRigster = (Activity_UseRigster) getActivity();
-							activity_UseRigster.rigster(false);
+							Activity_Login activity_Login = (Activity_Login) getActivity();
+							activity_Login.rigster(false);
 							Intent intent = new Intent();
 							intent.setClass(getActivity(), Activity_Main.class);
 							startActivity(intent);

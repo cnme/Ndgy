@@ -7,22 +7,15 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.ref.SoftReference;
 import java.util.HashMap;
-
-import com.back.ndgy.ui.Activity_img;
 import com.back.ndgy.utils.ActivityUtils;
-
-import android.R.integer;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.widget.ImageView;
 
 public class AsyncBitmapLoader {
-	/**
-	 * å›¾ç‰‡ä¸‹è½½
-	 */
+	
 	private HashMap<String, SoftReference<Bitmap>> imageCache = null;
 
 	public AsyncBitmapLoader() {
@@ -31,7 +24,7 @@ public class AsyncBitmapLoader {
 
 	public Bitmap loadBitmap(final ImageView imageView, final String imageURL,
 			int isScrolling, final ImageCallBack imageCallBack) {
-		// ä»å†…å­˜ä¸­å–
+		// ´ÓÄÚ´æÖĞÈ¡
 		if (imageCache.containsKey(imageURL)) {
 			SoftReference<Bitmap> reference = imageCache.get(imageURL);
 			Bitmap bitmap = reference.get();
@@ -40,7 +33,7 @@ public class AsyncBitmapLoader {
 			}
 		} else {
 			/**
-			 * ä»æœ¬åœ°å–
+			 * ´Ó±¾µØÈ¡
 			 */
 			String bitmapName = imageURL
 					.substring(imageURL.lastIndexOf("/") + 1);
@@ -61,7 +54,7 @@ public class AsyncBitmapLoader {
 			}
 		}
 		if (isScrolling == 0) {
-			Log.i("ï¿½ï¿½ï¿½ï¿½", isScrolling + "");
+			
 			final Handler handler = new Handler() {
 				/*
 				 * (non-Javadoc)
@@ -74,16 +67,12 @@ public class AsyncBitmapLoader {
 					imageCallBack.imageLoad(imageView, (Bitmap) msg.obj);
 				}
 			};
-			// å¼€å¯çº¿ç¨‹ä»ç½‘ç»œä¸‹è½½
+			// ¿ªÆôÏß³Ì´ÓÍøÂçÏÂÔØ
 			new Thread() {
-				/*
-				 * (non-Javadoc)
-				 * 
-				 * @see java.lang.Thread#run()
-				 */
+				
 				@Override
 				public void run() {
-					Log.i("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼Æ¬", "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼Æ¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
+					
 					// TODO Auto-generated method stub
 					InputStream bitmapIs = HttpUtils.getStreamFromURL(imageURL);
 

@@ -10,20 +10,14 @@ import com.back.ndgy.data.Comment;
 import com.back.ndgy.data.Myapplication;
 import com.back.ndgy.data.User;
 import com.back.ndgy.utils.ActivityUtils;
-import android.R.integer;
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -33,22 +27,26 @@ import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+/**
+ * 
+ * @Back
+ * @MainActivity 管理 fragment菜单及相关的UI控件
+ * @2015/5
+ */
 public class Activity_Main extends Activity implements OnClickListener {
-	private FragmentManager fm;
-	private FragmentTransaction ft;
-	private Fragment_menu menu;
-	private Fragment_freedom freedomfg;;
-	private Boolean menu_isopen = true;
+	private FragmentManager fm;// fragment 管理
+	private FragmentTransaction ft;// fragment 事务
+	private Fragment_menu menu;// fragment 菜单
+	private Fragment_freedom freedomfg;
+	private Boolean menu_isopen = true;// 菜单的开关控制
 	private ImageView iv_menu, btn_edit;
 	private TextView tv_new_message;
-	private RefreshListView mc_lv;
 	private SharedPreferences sp;
-	private Animation mRotateAnimation;
-	private Fragment from, to;
+	private Animation mRotateAnimation;// 菜单的动画效果
+	private Fragment from, to;// 切换fragment
 	private Fragment_love love;
 	private Fragment_Study study;
 	private Fragment_travel travel;
-	public boolean Back = true;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -61,12 +59,14 @@ public class Activity_Main extends Activity implements OnClickListener {
 		DisplayMetrics outMetrics = new DisplayMetrics();
 		manager.getDefaultDisplay().getMetrics(outMetrics);
 		int width = outMetrics.widthPixels;
-		int height = outMetrics.heightPixels;
 		sp.edit().putInt("width", width).commit();
 
 		querynotice();
 	}
 
+	/**
+	 * 初始化视图控件，并将conten_center替换为fragment
+	 */
 	private void IntView() {
 
 		iv_menu = (ImageView) findViewById(R.id.btn_nav);
@@ -104,8 +104,10 @@ public class Activity_Main extends Activity implements OnClickListener {
 		super.onResume();
 	}
 
+	/**
+	 * 获取被评论提醒数据
+	 */
 	public void querynotice() {
-		Log.i("notice", "开始notice");
 		User user = BmobUser.getCurrentUser(this, User.class);
 		BmobQuery<Comment> eq1 = new BmobQuery<Comment>();
 		eq1.addWhereEqualTo("new_message", false);
@@ -193,8 +195,11 @@ public class Activity_Main extends Activity implements OnClickListener {
 
 	private static long firstTime = 0;
 
+	/**
+	 * 关闭应用
+	 */
 	private void Clone() {
-		
+
 		if (firstTime + 2000 > System.currentTimeMillis()) {
 			Myapplication.getInstance().exit();
 			super.onBackPressed();
@@ -204,6 +209,10 @@ public class Activity_Main extends Activity implements OnClickListener {
 		}
 	}
 
+	/**
+	 * 菜单开关及动画效果
+	 * @param flag
+	 */
 	public void openmenu(boolean flag) {
 		if (flag) {
 			mRotateAnimation = new RotateAnimation(0.0f, 360.0f,
@@ -236,6 +245,10 @@ public class Activity_Main extends Activity implements OnClickListener {
 		}
 	}
 
+	/**
+	 * 切换fragment页
+	 * @param index
+	 */
 	public void switchContent(int index) {
 
 		switch (sp.getInt("index", 0)) {

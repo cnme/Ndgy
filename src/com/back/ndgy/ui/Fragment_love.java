@@ -24,11 +24,11 @@ public class Fragment_love extends Fragment implements OnClickListener,
 	private LoveAdapter mcadapter;
 	private SharedPreferences spPreferences;
 	public static ArrayList<LoveData> DataList = new ArrayList<LoveData>();
-	private static final int STATE_FRIST = 0;// 首次加载
-	private static final int STATE_REFRESH = 1;// 下拉刷新
-	private static final int STATE_MORE = 2;// 加载更多
-	private int limit = 10; // 每页的数据是10条
-	private int curPage = 0; // 当前页的编号，从0开始
+	private static final int STATE_FRIST = 0;
+	private static final int STATE_REFRESH = 1;
+	private static final int STATE_MORE = 2;
+	private int limit = 10; 
+	private int curPage = 0; 
 	private SharedPreferences sp;
 
 	@Override

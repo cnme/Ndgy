@@ -1,22 +1,13 @@
 package com.back.ndgy.adapter;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
-
-import cn.bmob.v3.listener.UpdateListener;
-
 import com.back.ndgy.R;
 import com.back.ndgy.adapter.AsyncBitmapLoader.ImageCallBack;
-import com.back.ndgy.data.FreedomSpeechDate;
-import com.back.ndgy.data.LoveData;
 import com.back.ndgy.data.TravelData;
 import com.back.ndgy.data.User;
 import com.back.ndgy.ui.Activity_Comment;
 import com.back.ndgy.ui.RefreshListView;
 import com.back.ndgy.ui.Activity_img;
-
-import android.R.integer;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -28,7 +19,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;

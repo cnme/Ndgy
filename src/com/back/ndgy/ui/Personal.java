@@ -1,19 +1,6 @@
 package com.back.ndgy.ui;
-
-import java.io.ByteArrayOutputStream;
-
 import com.back.ndgy.R;
-
-import android.R.color;
-import android.R.integer;
 import android.app.Activity;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Matrix;
-import android.graphics.Paint;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;

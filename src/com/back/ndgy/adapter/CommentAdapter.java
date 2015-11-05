@@ -1,21 +1,11 @@
 package com.back.ndgy.adapter;
 
 import java.util.List;
-
-import cn.bmob.v3.BmobQuery;
-import cn.bmob.v3.BmobQuery.CachePolicy;
-import cn.bmob.v3.listener.GetListener;
-
 import com.back.ndgy.R;
 import com.back.ndgy.data.Comment;
-import com.back.ndgy.data.User;
-import com.back.ndgy.ui.Activity_Setting;
-
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;

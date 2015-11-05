@@ -2,14 +2,10 @@ package com.back.ndgy.ui;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
-import cn.bmob.v3.BmobQuery.CachePolicy;
-import cn.bmob.v3.datatype.BmobPointer;
 import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.GetListener;
-
 import com.back.ndgy.R;
 import com.back.ndgy.adapter.NoticeAdapter;
 import com.back.ndgy.data.Comment;
@@ -19,19 +15,22 @@ import com.back.ndgy.data.Myapplication;
 import com.back.ndgy.data.StudyData;
 import com.back.ndgy.data.TravelData;
 import com.back.ndgy.data.User;
-
 import android.app.Activity;
-import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
+/**
+ * 
+ * @Back 
+ * @评论通知
+ * @2015/5
+ */
 public class Activity_Notice extends Activity {
 
 	private ListView lv_notice;
@@ -53,12 +52,11 @@ public class Activity_Notice extends Activity {
 		OnClick();
 	}
 
+	/**
+	 * 获取评论信息
+	 */
 	private void InitData() {
-		Log.i("notice", "查询数据");
-		Log.i("notice", "开始notice");
 		User user = BmobUser.getCurrentUser(this, User.class);
-		Comment comment = new Comment();
-
 		BmobQuery<Comment> eq2 = new BmobQuery<Comment>();
 		eq2.addWhereEqualTo("datauser", user);
 		BmobQuery<Comment> eq3 = new BmobQuery<Comment>();

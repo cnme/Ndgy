@@ -3,14 +3,10 @@ package com.back.ndgy.ui;
 import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.listener.SaveListener;
-
 import com.back.ndgy.R;
-import com.back.ndgy.data.User;
 import com.back.ndgy.utils.ActivityUtils;
-
 import android.app.Activity;
 import android.app.Dialog;
-import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
@@ -22,9 +18,14 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Toast;
 
-public class Activity_UseRigster extends Activity implements OnClickListener {
+/**
+ * 
+ * @Back
+ * @登录
+ * @2015/5
+ */
+public class Activity_Login extends Activity implements OnClickListener {
 	private EditText user_name_input, user_password_input;
 	private Button btn;
 	private String email, name, password;
@@ -38,8 +39,8 @@ public class Activity_UseRigster extends Activity implements OnClickListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		Bmob.initialize(this, "d25ecd4fc957b6e70b6a713987e2214e");
 		setContentView(R.layout.activity_login);
+		Bmob.initialize(this, "d25ecd4fc957b6e70b6a713987e2214e");
 		user_name_input = (EditText) findViewById(R.id.user_name_input);
 		user_password_input = (EditText) findViewById(R.id.user_password_input);
 		rigster = (ImageView) findViewById(R.id.iv_rigster);
@@ -47,10 +48,36 @@ public class Activity_UseRigster extends Activity implements OnClickListener {
 		rigster.setOnClickListener(this);
 		btn.setOnClickListener(this);
 		sp = getSharedPreferences("infor", 0);
+	}
+	
+	@Override
+	public void onClick(View v) {
 
-		autologin();
+		switch (v.getId()) {
+		case R.id.btn_login:
+			name = user_name_input.getText().toString().trim();
+			password = user_password_input.getText().toString().trim();
+			if (TextUtils.isEmpty(name)) {
+				ActivityUtils.Toast(this, "用户名为空");
+			} else if (TextUtils.isEmpty(password)) {
+				ActivityUtils.Toast(this, "密码为空");
+			} else {
+				sp.edit().putString("name", name).commit();
+				sp.edit().putString("password", password).commit();
+				login();
+			}
+			break;
+
+		case R.id.iv_rigster:
+			rigster(true);
+			break;
+		}
+
 	}
 
+	/**
+	 *获取缓存用户，自动登录/注册
+	 *//*
 	private void autologin() {
 		if (sp.getString("name", "back000").equals("back000")) {
 
@@ -89,8 +116,11 @@ public class Activity_UseRigster extends Activity implements OnClickListener {
 			});
 		}
 
-	}
+	}*/
 
+	/**
+	 * 登录
+	 */
 	private void login() {
 		View view1 = View.inflate(this, R.layout.dialog_loading, null);
 		final Dialog dialog1 = new Dialog(this, R.style.dialog);
@@ -104,8 +134,8 @@ public class Activity_UseRigster extends Activity implements OnClickListener {
 			@Override
 			public void onSuccess() {
 				// TODO Auto-generated method stub
-				ActivityUtils.Toast(Activity_UseRigster.this, "登 陆 成 功");
-				Intent intent = new Intent(Activity_UseRigster.this,
+				ActivityUtils.Toast(Activity_Login.this, "登 陆 成 功");
+				Intent intent = new Intent(Activity_Login.this,
 						Activity_Main.class);
 				startActivity(intent);
 				dialog1.cancel();
@@ -116,38 +146,19 @@ public class Activity_UseRigster extends Activity implements OnClickListener {
 			public void onFailure(int code, String msg) {
 				// TODO Auto-generated method stub
 				dialog1.cancel();
-				ActivityUtils.Toast(Activity_UseRigster.this, "登陆失败" + msg);
+				ActivityUtils.Toast(Activity_Login.this, "登陆失败" + msg);
 
 			}
 
 		});
 	}
 
-	@Override
-	public void onClick(View v) {
+	
 
-		switch (v.getId()) {
-		case R.id.btn_login:
-			name = user_name_input.getText().toString().trim();
-			password = user_password_input.getText().toString().trim();
-			if (TextUtils.isEmpty(name)) {
-				ActivityUtils.Toast(this, "用户名为空");
-			} else if (TextUtils.isEmpty(password)) {
-				ActivityUtils.Toast(this, "密码为空");
-			} else {
-				sp.edit().putString("name", name).commit();
-				sp.edit().putString("password", password).commit();
-				login();
-			}
-			break;
-
-		case R.id.iv_rigster:
-			rigster(true);
-			break;
-		}
-
-	}
-
+	/**
+	 * 打开注册页
+	 * @param on
+	 */
 	public void rigster(boolean on) {
 
 		f_rigster = new Fragment_rigster();

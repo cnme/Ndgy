@@ -2,13 +2,11 @@ package com.back.ndgy.ui;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.BmobQuery.CachePolicy;
 import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.GetListener;
-
 import com.back.ndgy.R;
 import com.back.ndgy.adapter.AsyncBitmapLoader;
 import com.back.ndgy.adapter.FreedomSpeechAdapter;
@@ -22,10 +20,6 @@ import com.back.ndgy.data.Myapplication;
 import com.back.ndgy.data.StudyData;
 import com.back.ndgy.data.TravelData;
 import com.back.ndgy.data.User;
-import com.back.ndgy.utils.ActivityUtils;
-
-import B.in;
-import android.R.integer;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -44,10 +38,15 @@ import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.LinearLayout.LayoutParams;
 
+/**
+ * 
+ * @Back
+ * @个人发布的动态页
+ * @2015/5
+ */
 public class Activity_person extends Activity implements
 		RefreshListView.IOnRefreshListener, RefreshListView.IOnLoadMoreListener {
 	private ImageView personal_icon;
@@ -61,20 +60,18 @@ public class Activity_person extends Activity implements
 	public static ArrayList<TravelData> DataList3 = new ArrayList<TravelData>();
 	private AsyncBitmapLoader asyncBitmapLoader;
 	private SharedPreferences sp;
-	private LoveAdapter adapter1;
-	private FreedomSpeechAdapter adapter;
 	private LinearLayout linearLayout1;
 	private ViewPager viewPager;
-	private int currIndex = 0;// 当前页卡编号
-	private ImageView imageView;// 页卡标题动画图片
-	private int textViewW = 0, index;// 页卡标题的宽
+	private int currIndex = 0;
+	private ImageView imageView;
+	private int textViewW = 0, index;
 	private List<View> listViews;
 	private View view, view1, view2, view3;
-	private static final int STATE_FRIST = 0;// 首次加载
-	private static final int STATE_REFRESH = 1;// 下拉刷新
-	private static final int STATE_MORE = 2;// 加载更多
-	private int limit = 10; // 每页的数据是10条
-	private int curPage = 0; // 当前页的编号，从0开始
+	private static final int STATE_FRIST = 0;
+	private static final int STATE_REFRESH = 1;
+	private static final int STATE_MORE = 2;
+	private int limit = 10;
+	private int curPage = 0;
 	private FreedomSpeechAdapter madapter;
 	private LoveAdapter madapter1;
 	private StudyAdapter madapter2;
@@ -120,6 +117,9 @@ public class Activity_person extends Activity implements
 		madapter3 = new TravelAdapter(this, DataList3, sp.getInt("width", 0));
 	}
 
+	/**
+	 * 初始胡ViewPager,四个区存放于四个Page
+	 */
 	private void initViewPager() {
 		listViews = new ArrayList<View>();
 		mInflater = getLayoutInflater();
@@ -231,7 +231,9 @@ public class Activity_person extends Activity implements
 
 	}
 
-	/* 页卡切换监听 */
+	/**
+	 * 页面切换监听
+	 */
 	public class MyOnPageChangeListener implements OnPageChangeListener {
 
 		@Override
@@ -256,7 +258,7 @@ public class Activity_person extends Activity implements
 
 		@Override
 		public void onPageScrolled(int arg0, float arg1, int arg2) {
-			
+
 		}
 
 		@Override
@@ -266,7 +268,9 @@ public class Activity_person extends Activity implements
 
 	}
 
-	/* 设置标题文本的颜色 */
+	/**
+	 * 设置标题文本的颜色
+	 */
 	private void setTextTitleSelectedColor(int arg0) {
 		int count = viewPager.getChildCount();
 		for (int i = 0; i < count; i++) {
@@ -279,7 +283,9 @@ public class Activity_person extends Activity implements
 		}
 	}
 
-	/* 设置图片宽度 */
+	/**
+	 * 设置图片宽度
+	 */
 	private void setImageViewWidth(int width) {
 		if (width != imageView.getWidth()) {
 			LayoutParams laParams = (LayoutParams) imageView.getLayoutParams();
@@ -288,29 +294,9 @@ public class Activity_person extends Activity implements
 		}
 	}
 
-	/* 标题点击监听 */
-	private class MyOnClickListener implements OnClickListener {
-		private int index = 0;
-
-		public MyOnClickListener(int i) {
-			index = i;
-		}
-
-		@Override
-		public void onClick(View v) {
-			viewPager.setCurrentItem(index);
-		}
-	}
-
-	/* 初始化动画 */
-	private void InitImageView() {
-
-		Matrix matrix = new Matrix();
-		matrix.postTranslate(0, 0);
-		imageView.setImageMatrix(matrix);//
-
-	}
-
+	/**
+	 * 获取数据
+	 */
 	private void queryData(final int page, final int actionType, final int index) {
 
 		User user = BmobUser.getCurrentUser(this, User.class);

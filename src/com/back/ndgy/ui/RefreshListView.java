@@ -33,17 +33,17 @@ public class RefreshListView extends ListView implements OnScrollListener,
 	private int mHeadContentWidth;
 	private int mHeadContentHeight;
 
-	private IOnRefreshListener mOnRefreshListener; // 头部刷新监听�?
+	private IOnRefreshListener mOnRefreshListener; // 头部刷新监听
 
-	// 用于保证startY的�?在一个完整的touch事件中只被记录一�?
+	// 用于保证startY的�?在一个完整的touch事件中只被记录一次
 	private boolean mIsRecord = false;
-	// 标记的Y坐标�?
+	// 标记的Y坐标的值
 	private int mStartY = 0;
-	// 当前视图能看到的第一个项的索�?
+	// 当前视图能看到的第一个项的索引
 	private int mFirstItemIndex = -1;
-	// MOVE时保存的Y坐标�?
+	// MOVE时保存的Y坐标的值
 	private int mMoveY = 0;
-	// LISTVIEW状�?
+	// LISTVIEW状态
 	private int mViewState = IListViewState.LVS_NORMAL;
 
 	private final static int RATIO = 2;
@@ -149,7 +149,7 @@ public class RefreshListView extends ListView implements OnScrollListener,
 
 	}
 
-	// 此方法直接照搬自网络上的�?��下拉刷新的demo，计算headView的width以及height
+	// 此方法直接照搬自网络上的下拉刷新的demo，计算headView的width以及height
 	private void measureView(View child) {
 		ViewGroup.LayoutParams p = child.getLayoutParams();
 		if (p == null) {
@@ -313,7 +313,7 @@ public class RefreshListView extends ListView implements OnScrollListener,
 			mRefreshTextview.setText("下拉可以刷新");
 			mArrowImageView.clearAnimation();
 
-			// 是由RELEASE_To_REFRESH状�?转变来的
+			// 是由RELEASE_To_REFRESH状态转变来的
 			if (mBack) {
 				mBack = false;
 				mArrowImageView.clearAnimation();
@@ -351,7 +351,7 @@ public class RefreshListView extends ListView implements OnScrollListener,
 	private View mLoadMoreView;
 	private TextView mLoadMoreTextView;
 	private View mLoadingView;
-	private IOnLoadMoreListener mLoadMoreListener; // 加载更多监听�?
+	private IOnLoadMoreListener mLoadMoreListener; // 加载更多监听
 	private int mLoadMoreState = IListViewState.LVS_NORMAL;
 
 	public void setOnLoadMoreListener(IOnLoadMoreListener listener) {
@@ -373,7 +373,7 @@ public class RefreshListView extends ListView implements OnScrollListener,
 		}
 	}
 
-	// flag 数据是否已全部加载完�?
+	// flag 数据是否已全部加载完
 	public void onLoadMoreComplete(boolean flag) {
 		if (flag) {
 			updateLoadMoreViewState(ILoadMoreViewState.LMVS_OVER);
@@ -416,10 +416,10 @@ public class RefreshListView extends ListView implements OnScrollListener,
 	 *************************************************/
 
 	public interface IListViewState {
-		int LVS_NORMAL = 0; // 普�?状�?
-		int LVS_PULL_REFRESH = 1; // 下拉刷新状�?
-		int LVS_RELEASE_REFRESH = 2; // 松开刷新状�?
-		int LVS_LOADING = 3; // 加载状�?
+		int LVS_NORMAL = 0; // 普通状态
+		int LVS_PULL_REFRESH = 1; // 下拉刷新状态
+		int LVS_RELEASE_REFRESH = 2; // 松开刷新状态
+		int LVS_LOADING = 3; // 加载状态
 	}
 
 	public interface IOnRefreshListener {
@@ -427,9 +427,9 @@ public class RefreshListView extends ListView implements OnScrollListener,
 	}
 
 	public interface ILoadMoreViewState {
-		int LMVS_NORMAL = 0; // 普�?状�?
-		int LMVS_LOADING = 1; // 加载状�?
-		int LMVS_OVER = 2; // 结束状�?
+		int LMVS_NORMAL = 0; // 普通状态
+		int LMVS_LOADING = 1; // 加载状态
+		int LMVS_OVER = 2; // 结束状态
 	}
 
 	public interface IOnLoadMoreListener {

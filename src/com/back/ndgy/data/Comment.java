@@ -1,7 +1,6 @@
 package com.back.ndgy.data;
 
 import cn.bmob.v3.BmobObject;
-import cn.bmob.v3.datatype.BmobRelation;
 
 /**
  * @author Back

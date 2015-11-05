@@ -2,21 +2,17 @@ package com.back.ndgy.ui;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
-import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.datatype.BmobPointer;
 import cn.bmob.v3.datatype.BmobRelation;
 import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UpdateListener;
-
 import com.back.ndgy.R;
 import com.back.ndgy.adapter.AsyncBitmapLoader;
 import com.back.ndgy.adapter.AsyncBitmapLoader.ImageCallBack;
 import com.back.ndgy.adapter.CommentAdapter;
-import com.back.ndgy.adapter.FreedomSpeechAdapter;
 import com.back.ndgy.data.LoveData;
 import com.back.ndgy.data.Comment;
 import com.back.ndgy.data.FreedomSpeechDate;
@@ -26,10 +22,8 @@ import com.back.ndgy.data.TravelData;
 import com.back.ndgy.data.User;
 import com.back.ndgy.utils.ActivityUtils;
 import com.back.ndgy.utils.Utility;
-
 import android.app.Activity;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -46,9 +40,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.Space;
 import android.widget.TextView;
 
+/**
+ * 
+ * @Back
+ * @评论管理
+ * @2015/5
+ */
 public class Activity_Comment extends Activity implements OnClickListener {
 	private ImageView iv_pic, avater, iv_love;
 	private TextView tv_content, tv_username, tv_love, tv_signature;
@@ -57,7 +56,6 @@ public class Activity_Comment extends Activity implements OnClickListener {
 	private TravelData mData3;
 	private FreedomSpeechDate mData;
 	private AsyncBitmapLoader asyncBitmapLoader;
-	private Context Context;
 	private String commtentcontent, picurl;
 	private ListView listview;
 	private EditText comment_content;
@@ -69,10 +67,7 @@ public class Activity_Comment extends Activity implements OnClickListener {
 	private SharedPreferences sp;
 	private User author;// 作者
 	private String content;// 文字
-	// private BmobFile picurl;// 图片名称
 	private Integer love;// 点赞
-	private Integer comment;// 评论
-	private boolean isPass;
 	private boolean myLove;// 赞
 
 	@Override
@@ -86,6 +81,9 @@ public class Activity_Comment extends Activity implements OnClickListener {
 
 	}
 
+	/**
+	 * 初始化视图控件
+	 */
 	private void InitView() {
 		sp = getSharedPreferences("setting", MODE_PRIVATE);
 		tv_love = (TextView) findViewById(R.id.tv_love);
@@ -104,6 +102,9 @@ public class Activity_Comment extends Activity implements OnClickListener {
 		adapter = new CommentAdapter(Activity_Comment.this, mComments);
 	}
 
+	/**
+	 * 初始化数据，接收来自Listview item的数据
+	 */
 	private void InitData() {
 
 		getWindow().setSoftInputMode(
@@ -160,6 +161,10 @@ public class Activity_Comment extends Activity implements OnClickListener {
 		avaterurl = getIntent().getStringExtra("avater");
 
 		if (avaterurl != null) {
+
+			/*
+			 * 异步下载头用户像
+			 */
 			Bitmap bitmap = asyncBitmapLoader.loadBitmap(avater, avaterurl, 0,
 					new ImageCallBack() {
 
@@ -225,6 +230,9 @@ public class Activity_Comment extends Activity implements OnClickListener {
 		return adapter.mComments.get(position);
 	}
 
+	/**
+	 * 获取item的评论
+	 */
 	private void fetchComment() {
 		BmobQuery<Comment> query = new BmobQuery<Comment>();
 		switch (sp.getInt("index", 0)) {
@@ -256,6 +264,8 @@ public class Activity_Comment extends Activity implements OnClickListener {
 					}
 
 					listview.setAdapter(adapter);
+
+					// 获取所有评论，给listview设定高度，使外层ScrollView能获取焦点
 					Utility.setListViewHeightBasedOnChildren(listview);
 				}
 			}
@@ -391,6 +401,10 @@ public class Activity_Comment extends Activity implements OnClickListener {
 		}
 	}
 
+	/**
+	 * 发布评论
+	 * 
+	 */
 	private void publishComment(final User user, String content) {
 
 		View view = View.inflate(this, R.layout.dialog_loading_data, null);
@@ -402,8 +416,9 @@ public class Activity_Comment extends Activity implements OnClickListener {
 		if (reply_name != null) {
 			comment.setByuser(byuser);
 			comment.setNew_message(false);
-			comment.setCommentContent(user.getUsername()+" 回复 "+reply_name+" : "+content);
-		}else {
+			comment.setCommentContent(user.getUsername() + " 回复 " + reply_name
+					+ " : " + content);
+		} else {
 
 			comment.setCommentContent(content);
 		}
@@ -526,6 +541,9 @@ public class Activity_Comment extends Activity implements OnClickListener {
 		});
 	}
 
+	/**
+	 * 隐藏软键盘
+	 */
 	private void hideSoftInput() {
 		InputMethodManager imm = (InputMethodManager) this
 				.getSystemService(android.content.Context.INPUT_METHOD_SERVICE);

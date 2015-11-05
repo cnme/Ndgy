@@ -1,22 +1,13 @@
 package com.back.ndgy.ui;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
-
 import cn.bmob.v3.BmobQuery;
-import cn.bmob.v3.BmobUser;
-import cn.bmob.v3.datatype.BmobPointer;
 import cn.bmob.v3.listener.FindListener;
-
 import com.back.ndgy.R;
 import com.back.ndgy.adapter.FreedomSpeechAdapter;
-import com.back.ndgy.data.Comment;
 import com.back.ndgy.data.FreedomSpeechDate;
-import com.back.ndgy.data.User;
 import com.back.ndgy.utils.ActivityUtils;
-import com.back.ndgy.utils.Utility;
-
 import android.app.Fragment;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -26,6 +17,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 
+/**
+ * 
+ * @Back
+ * @自由区
+ * @2015/5
+ */
 public class Fragment_freedom extends Fragment implements OnClickListener,
 		RefreshListView.IOnRefreshListener, RefreshListView.IOnLoadMoreListener {
 	private View rootview;
@@ -50,6 +47,7 @@ public class Fragment_freedom extends Fragment implements OnClickListener,
 		return rootview;
 	}
 
+	/* 在onDestroyView方法中释放占用的UI资源 */
 	@Override
 	public void onDestroyView() {
 		mcadapter = null;
@@ -75,6 +73,7 @@ public class Fragment_freedom extends Fragment implements OnClickListener,
 
 	}
 
+	/* 注册listview下拉刷新，上拉加载更多 */
 	protected void onload() {
 		freedoom_lv.setOnRefreshListener(this);
 		freedoom_lv.setOnLoadMoreListener(this);
@@ -102,9 +101,13 @@ public class Fragment_freedom extends Fragment implements OnClickListener,
 
 	}
 
+	/**
+	 * 获取数据
+	 * 
+	 * @param page
+	 * @param actionType
+	 */
 	public void queryData(final int page, final int actionType) {
-		Log.i("bmob", "pageN:" + page + " limit:" + limit + " actionType:"
-				+ actionType);
 		new Thread() {
 			public void run() {
 				BmobQuery<FreedomSpeechDate> query = new BmobQuery<FreedomSpeechDate>();

@@ -1,5 +1,5 @@
 package com.back.ndgy.ui;
-
+import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobUser;
 
 import com.back.ndgy.R;
@@ -7,13 +7,17 @@ import com.back.ndgy.data.User;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 
+/**
+ * 
+ * @Back
+ * @…¡∆¡“≥
+ * @2015/5
+ */
 public class Activity_Splash extends Activity {
 
-	private SharedPreferences sp;
 	private final int DISPLAY_TIME = 3000;
 
 	@Override
@@ -21,7 +25,7 @@ public class Activity_Splash extends Activity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_splash);
-		sp = getSharedPreferences("infor", 0);
+		Bmob.initialize(this, "d25ecd4fc957b6e70b6a713987e2214e");
 		redirectByTime();
 	}
 
@@ -41,7 +45,7 @@ public class Activity_Splash extends Activity {
 					Activity_Splash.this.finish();
 				} else {
 					Intent intent = new Intent(Activity_Splash.this,
-							Activity_UseRigster.class);
+							Activity_Login.class);
 					Activity_Splash.this.startActivity(intent);
 					Activity_Splash.this.finish();
 				}
