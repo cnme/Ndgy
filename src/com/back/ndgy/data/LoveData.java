@@ -5,14 +5,15 @@ import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.datatype.BmobRelation;
 
 public class LoveData extends BmobObject{
-	private User author;// ×÷Õß
-	private String content;// ÎÄ×Ö
-	private BmobFile picurl;// Í¼Æ¬Ãû³Æ
-	private Integer love;// µãÔÞ
-	private Integer comment;// ÆÀÂÛ
+	private User author;// ï¿½ï¿½ï¿½ï¿½
+	private String content;// ï¿½ï¿½ï¿½ï¿½
+	private BmobFile picurl;// Í¼Æ¬ï¿½ï¿½ï¿½
+	private Integer love;// ï¿½ï¿½ï¿½ï¿½
+	private Integer comment;// ï¿½ï¿½ï¿½ï¿½
 	private boolean isPass;
-	private boolean myLove;// ÔÞ
-	private BmobRelation relation;// ¹ØÁª
+	private boolean myLove;// ï¿½ï¿½
+	private BmobRelation relation;// ï¿½ï¿½ï¿½ï¿½
+	
 	public User getAuthor() {
 		return author;
 	}

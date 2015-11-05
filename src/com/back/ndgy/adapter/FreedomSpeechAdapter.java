@@ -116,13 +116,18 @@ public class FreedomSpeechAdapter extends BaseAdapter {
 				} else if (holder.avater.getTag().equals(avatarUrl)) {
 
 					holder.avater.setImageBitmap(bitmapavater);
+
 				}
 			}
 
 		}
-		
-		if (mData.getPicurl() != null) {
+
+		if (mData.getPicurl() == null) {
+			holder.img.setVisibility(View.GONE);
+
+		} else {
 			picurl = mData.getPicurl().getFileUrl(context);
+			Log.i("test", picurl);
 			holder.img.setTag(picurl);
 			Bitmap bitmap = asyncBitmapLoader.loadBitmap(holder.img, picurl,
 					listview.isScrolling, new ImageCallBack() {
@@ -157,6 +162,7 @@ public class FreedomSpeechAdapter extends BaseAdapter {
 
 				holder.img.setLayoutParams(imgParams);
 				holder.img.setImageBitmap(bitmap);
+				holder.img.setVisibility(View.VISIBLE);
 			}
 
 		}

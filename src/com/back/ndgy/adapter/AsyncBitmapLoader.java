@@ -21,7 +21,7 @@ import android.widget.ImageView;
 
 public class AsyncBitmapLoader {
 	/**
-	 * ÄÚ´æÍ¼Æ¬ÈíÒıÓÃ»º³å
+	 * å›¾ç‰‡ä¸‹è½½
 	 */
 	private HashMap<String, SoftReference<Bitmap>> imageCache = null;
 
@@ -31,7 +31,7 @@ public class AsyncBitmapLoader {
 
 	public Bitmap loadBitmap(final ImageView imageView, final String imageURL,
 			int isScrolling, final ImageCallBack imageCallBack) {
-		// ÔÚÄÚ´æ»º´æÖĞ£¬Ôò·µ»ØBitmap¶ÔÏó
+		// ä»å†…å­˜ä¸­å–
 		if (imageCache.containsKey(imageURL)) {
 			SoftReference<Bitmap> reference = imageCache.get(imageURL);
 			Bitmap bitmap = reference.get();
@@ -40,7 +40,7 @@ public class AsyncBitmapLoader {
 			}
 		} else {
 			/**
-			 * ¼ÓÉÏÒ»¸ö¶Ô±¾µØ»º´æµÄ²éÕÒ
+			 * ä»æœ¬åœ°å–
 			 */
 			String bitmapName = imageURL
 					.substring(imageURL.lastIndexOf("/") + 1);
@@ -61,7 +61,7 @@ public class AsyncBitmapLoader {
 			}
 		}
 		if (isScrolling == 0) {
-			Log.i("»¬¶¯", isScrolling + "");
+			Log.i("ï¿½ï¿½ï¿½ï¿½", isScrolling + "");
 			final Handler handler = new Handler() {
 				/*
 				 * (non-Javadoc)
@@ -74,7 +74,7 @@ public class AsyncBitmapLoader {
 					imageCallBack.imageLoad(imageView, (Bitmap) msg.obj);
 				}
 			};
-			// Èç¹û²»ÔÚÄÚ´æ»º´æÖĞ£¬Ò²²»ÔÚ±¾µØ£¨±»jvm»ØÊÕµô£©£¬Ôò¿ªÆôÏß³ÌÏÂÔØÍ¼Æ¬
+			// å¼€å¯çº¿ç¨‹ä»ç½‘ç»œä¸‹è½½
 			new Thread() {
 				/*
 				 * (non-Javadoc)
@@ -83,7 +83,7 @@ public class AsyncBitmapLoader {
 				 */
 				@Override
 				public void run() {
-					Log.i("ÕıÔÚÏÂÔØÍ¼Æ¬", "ÕıÔÚÏÂÔØÍ¼Æ¬¡£¡£¡£¡£¡£¡£");
+					Log.i("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼Æ¬", "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼Æ¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 					// TODO Auto-generated method stub
 					InputStream bitmapIs = HttpUtils.getStreamFromURL(imageURL);
 

@@ -115,7 +115,9 @@ public class TravelAdapter extends BaseAdapter {
 
 		}
 
-		if (mData.getPicurl() != null) {
+		if (mData.getPicurl() == null) {
+			holder.img.setVisibility(View.GONE);
+		} else {
 			picurl = mData.getPicurl().getFileUrl(context);
 			holder.img.setTag(picurl);
 			Bitmap bitmap = asyncBitmapLoader.loadBitmap(holder.img, picurl,
@@ -156,6 +158,7 @@ public class TravelAdapter extends BaseAdapter {
 
 				holder.img.setLayoutParams(imgParams);
 				holder.img.setImageBitmap(bitmap);
+				holder.img.setVisibility(View.VISIBLE);
 			}
 
 		}

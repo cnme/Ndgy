@@ -99,7 +99,7 @@ public class Fragment_love extends Fragment implements OnClickListener,
 		new Thread() {
 			public void run() {
 				BmobQuery<LoveData> query = new BmobQuery<LoveData>();
-				query.order("-updatedAt");
+				query.order("-createddAt");
 				query.setLimit(limit);
 				query.setSkip(page * limit);
 				query.include("author");

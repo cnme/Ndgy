@@ -1,9 +1,5 @@
 package com.back.ndgy.data;
 
-import android.R.integer;
-
-import com.bmob.BmobProFile;
-
 import cn.bmob.v3.BmobObject;
 import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.datatype.BmobRelation;

@@ -122,7 +122,7 @@ public class Activity_EditContent extends Activity implements OnClickListener {
 	}
 
 	private void publish(final String commitContent) {
-		
+
 		final BmobFile figureFile = new BmobFile(new File(targeturl));
 		figureFile.upload(this, new UploadFileListener() {
 
@@ -130,7 +130,7 @@ public class Activity_EditContent extends Activity implements OnClickListener {
 			public void onSuccess() {
 				Toast("图片上传成功");
 				publishWithoutFigure(commitContent, figureFile);
-			
+
 			}
 
 			@Override
@@ -140,7 +140,7 @@ public class Activity_EditContent extends Activity implements OnClickListener {
 
 			@Override
 			public void onFailure(int arg0, String arg1) {
-		
+
 			}
 		});
 
@@ -150,8 +150,10 @@ public class Activity_EditContent extends Activity implements OnClickListener {
 			BmobFile figureFile) {
 		Toast("开始发表" + figureFile);
 
-		View view = View.inflate(Activity_EditContent.this, R.layout.dialog_loading_data, null);
-		final Dialog dialog = new Dialog(Activity_EditContent.this, R.style.dialog);
+		View view = View.inflate(Activity_EditContent.this,
+				R.layout.dialog_loading_data, null);
+		final Dialog dialog = new Dialog(Activity_EditContent.this,
+				R.style.dialog);
 		dialog.setContentView(view);
 		dialog.show();
 		User user = BmobUser.getCurrentUser(Activity_EditContent.this,
@@ -309,15 +311,19 @@ public class Activity_EditContent extends Activity implements OnClickListener {
 			break;
 
 		case REQUEST_CODE_CAMERA:
-			if (data == null) {
-				Toast("开始处理");
+			Toast("开始处理");
 
-				String files = ActivityUtils.getCacheDirectory(2) + "Original/"
-						+ currenttime + ".jpg";
+			String files = ActivityUtils.getCacheDirectory(2) + "Original/"
+					+ currenttime + ".jpg";
+			File file = new File(files);
+			if (file.exists() && file.length() != 0) {
 				Bitmap bitmap = compressImageFromFile(files);
 				targeturl = saveToSdCard(bitmap);
 				iv_take_pic.setImageBitmap(bitmap);
 				open_pic.setVisibility(View.GONE);
+				Toast("开始处理1");
+			} else {
+
 			}
 
 			break;

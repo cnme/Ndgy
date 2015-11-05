@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="10dp" >
+    android:padding="10dp"
+    android:descendantFocusability="blocksDescendants" >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -37,8 +38,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tv_name"
                 android:text="个性签名"
-                android:textColor="#FF6EB4"
-                />
+                android:textColor="#FF6EB4" />
         </RelativeLayout>
     </LinearLayout>
 
@@ -52,8 +52,8 @@
             android:id="@+id/tv_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="#666666"
             android:text="内容住区"
+            android:textColor="#666666"
             android:textSize="16sp" />
     </RelativeLayout>
 
@@ -85,7 +85,8 @@
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_marginRight="2dp"
-            android:background="@drawable/ndgy_icon_love_default" />
+            android:background="@drawable/ndgy_icon_love_default"
+            android:focusable="false" />
 
         <TextView
             android:id="@+id/tv_love"
@@ -93,6 +94,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:layout_marginRight="20dp"
+            android:focusable="false"
             android:text="0"
             android:textColor="#666666" />
 

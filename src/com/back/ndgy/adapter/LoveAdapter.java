@@ -60,9 +60,12 @@ public class LoveAdapter extends BaseAdapter {
 
 	@Override
 	public View getView(final int position, View convertView, ViewGroup parent) {
+		holder = new ViewHolder();
+		OnClick listener = new OnClick(position);
+
 		if (convertView == null) {
 			convertView = inflater.inflate(R.layout.fragment_item, null);
-			holder = new ViewHolder();
+
 			holder.tv_username = (TextView) convertView
 					.findViewById(R.id.tv_name);
 			holder.tv_content = (TextView) convertView
@@ -74,6 +77,7 @@ public class LoveAdapter extends BaseAdapter {
 			holder.tv_comment = (TextView) convertView
 					.findViewById(R.id.tv_comment);
 			holder.tv_love = (TextView) convertView.findViewById(R.id.tv_love);
+
 			holder.img = (ImageView) convertView.findViewById(R.id.iv_pic);
 			holder.iv_love = (ImageView) convertView.findViewById(R.id.iv_love);
 			holder.lin_commect = (LinearLayout) convertView
@@ -89,6 +93,8 @@ public class LoveAdapter extends BaseAdapter {
 		holder.tv_signature.setText(user.getSignature());
 		holder.tv_content.setText(mData.getContent());
 		holder.tv_love.setText(mData.getLove() + "");
+		holder.tv_love.setTag(position);
+		holder.tv_love.setOnClickListener(listener);
 
 		if (user.getAvatar() != null) {
 			avatarUrl = user.getAvatar().getFileUrl(context);
@@ -114,7 +120,9 @@ public class LoveAdapter extends BaseAdapter {
 
 		}
 
-		if (mData.getPicurl() != null) {
+		if (mData.getPicurl() == null) {
+			holder.img.setVisibility(View.GONE);
+		} else {
 			picurl = mData.getPicurl().getFileUrl(context);
 			holder.img.setTag(picurl);
 			Bitmap bitmap = asyncBitmapLoader.loadBitmap(holder.img, picurl,
@@ -155,41 +163,30 @@ public class LoveAdapter extends BaseAdapter {
 
 				holder.img.setLayoutParams(imgParams);
 				holder.img.setImageBitmap(bitmap);
+				holder.img.setVisibility(View.VISIBLE);
 			}
-
 		}
 
-		holder.lin_commect.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-
-				mData = (LoveData) getItem(position);
-				Intent intent = new Intent();
-				intent.putExtra("data", mData);
-				intent.putExtra("avater", mData.getAuthor().getAvatar()
-						.getFileUrl(context));
-				if (mData.getPicurl() != null) {
-
-					intent.putExtra("picurl",
-							mData.getPicurl().getFileUrl(context));
-				}
-				intent.setClass(context, Activity_Comment.class);
-				context.startActivity(intent);
-
-			}
-		});
-
-		if (mData.isMyLove()) {
-			holder.iv_love
-					.setBackgroundResource(R.drawable.ndgy_icon_love_pressed);
-			holder.tv_love.setTextColor(Color.parseColor("#3399FF"));
-		} else {
-
-			holder.iv_love
-					.setBackgroundResource(R.drawable.ndgy_icon_love_default);
-			holder.tv_love.setTextColor(Color.parseColor("#666666"));
-		}
+		// holder.lin_commect.setOnClickListener(new OnClickListener() {
+		//
+		// @Override
+		// public void onClick(View v) {
+		//
+		// mData = (LoveData) getItem(position);
+		// Intent intent = new Intent();
+		// intent.putExtra("data", mData);
+		// intent.putExtra("avater", mData.getAuthor().getAvatar()
+		// .getFileUrl(context));
+		// if (mData.getPicurl() != null) {
+		//
+		// intent.putExtra("picurl",
+		// mData.getPicurl().getFileUrl(context));
+		// }
+		// intent.setClass(context, Activity_Comment.class);
+		// context.startActivity(intent);
+		//
+		// }
+		// });
 
 		holder.img.setOnClickListener(new OnClickListener() {
 
@@ -210,11 +207,30 @@ public class LoveAdapter extends BaseAdapter {
 		return convertView;
 	}
 
+	public class OnClick implements OnClickListener {
+		int position;
+
+		public OnClick(int position) {
+			this.position = position;
+			Log.i("position", position + "            d");
+		}
+
+		@Override
+		public void onClick(View v) {
+			Log.i("µ„‘ﬁ¡À", position + "   ");
+
+			holder.iv_love
+					.setBackgroundResource(R.drawable.ndgy_icon_love_pressed);
+			holder.tv_love.setTextColor(Color.parseColor("#ff0000"));
+		}
+	}
+
 	class ViewHolder {
 		ImageView img;
 		TextView tv_content, tv_love, tv_username, tv_comment, tv_signature;
 		ImageView iv_love, avater;
 		LinearLayout lin_commect;
+		int index;
 	}
 
 	public void refreshData(ArrayList<LoveData> arg0) {

@@ -159,7 +159,7 @@ public class Activity_Main extends Activity implements OnClickListener {
 			startActivity(intent);
 			break;
 		case R.id.tv_new_message:
-			Intent noticeIntent = new Intent(this, Activity_Notice.class);
+			Intent noticeIntent = new Intent(this, Activity_goods.class);
 			startActivity(noticeIntent);
 			break;
 		}
