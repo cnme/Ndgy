@@ -17,7 +17,13 @@
 
 7.多线程（文件的异步下载）。
 
-8.网络请求（基于Bmob技）的基础实现。
+8.网络请求（基于Bmob）的基础实现。
 
 
-相关知识解析：<a href=http://cnme.github.io/>Back小站</a>
+相关知识解析：[Back小站](http://cnme.github.io/ "Back小站")
+
+应用截图：
+
+![主页](http://i.imgur.com/t6kuQ88.png)
+![菜单](http://i.imgur.com/R2Cvs19.png)
+![个人信息](http://i.imgur.com/JNW3cPB.png)
